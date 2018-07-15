@@ -97,15 +97,11 @@ module NyanCat
       @example_count.to_s.length * 2 + 6
     end
 
-    # A Unix trick using stty to get the console columns
+    # Monkey Patched... Broken in CI
     #
     # @return [Fixnum]
     def terminal_width
-      if defined? JRUBY_VERSION
-        default_width = 80
-      else
-        default_width = `stty size`.split.map { |x| x.to_i }.reverse.first - 1
-      end
+      default_width = 100
       @terminal_width ||= default_width
     end
 
